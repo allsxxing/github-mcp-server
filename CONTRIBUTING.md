@@ -29,6 +29,8 @@ These are one time installations required to be able to test your changes locall
 1. Install Go [through download](https://go.dev/doc/install) | [through Homebrew](https://formulae.brew.sh/formula/go)
 2. [Install golangci-lint v2](https://golangci-lint.run/welcome/install/#local-installation)
 
+**New to forking?** Check out our [Fork Setup and Maintenance Guide](docs/fork-setup-guide.md) for detailed instructions on setting up your fork, syncing with upstream, and maintaining your development environment.
+
 ## Submitting a pull request
 
 1. [Fork][fork] and clone the repository
@@ -53,6 +55,7 @@ Here are a few things you can do that will increase the likelihood of your pull 
 
 ## Resources
 
+- [Fork Setup and Maintenance Guide](docs/fork-setup-guide.md)
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
 - [Using Pull Requests](https://help.github.com/articles/about-pull-requests/)
 - [GitHub Help](https://help.github.com)
