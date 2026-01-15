@@ -6,12 +6,14 @@ This is the **GitHub MCP Server**, a Model Context Protocol (MCP) server that co
 
 **Key Details:**
 - **Language:** Go 1.24+ (~38k lines of code)
-- **Type:** MCP server application with CLI interface
+- **Type:** MCP server application with CLI interface using stdio transport
 - **Primary Package:** github-mcp-server (stdio MCP server - **this is the main focus**)
 - **Secondary Package:** mcpcurl (testing utility - don't break it, but not the priority)
 - **Framework:** Uses modelcontextprotocol/go-sdk for MCP protocol, google/go-github for GitHub API
+- **Architecture:** Server implements MCP tool protocol - each tool is a Go function that returns structured results
 - **Size:** ~60MB repository, 70 Go files
 - **Library Usage:** This repository is also used as a library by the remote server. Functions that could be called by other repositories should be exported (capitalized), even if not required internally. Preserve existing export patterns.
+- **Canonical Repository:** github/github-mcp-server (forks may show different paths)
 
 **Code Quality Standards:**
 - **Popular Open Source Repository** - High bar for code quality and clarity
@@ -129,21 +131,29 @@ All workflows run on push/PR unless noted. Located in `.github/workflows/`:
 
 ### Unit Tests
 
-- Use `testify` for assertions (`require` for critical checks, `assert` for non-blocking)
-- Tests are in `*_test.go` files alongside implementation (internal tests, not `_test` package)
-- Mock GitHub API with `go-github-mock` (REST) or `githubv4mock` (GraphQL)
-- Test structure for tools:
-  1. Test tool snapshot
-  2. Verify critical schema properties (e.g., ReadOnly annotation)
-  3. Table-driven behavioral tests
+Testing framework and patterns:
+- **Assertions:** Use `testify` library - `require` for critical checks (stops test on failure), `assert` for non-blocking checks
+- **Location:** Tests are in `*_test.go` files alongside implementation (internal tests, not `_test` package)
+- **Mocking:** 
+  - REST API: Use in-repo `MockHTTPClientWithHandlers` helpers (see `helper_test.go`)
+  - GraphQL API: Use `githubv4mock` package from `internal/githubv4mock/`
+- **Test structure for MCP tools (standard pattern):**
+  1. Test tool snapshot with `toolsnaps.Test()`
+  2. Verify critical schema properties (e.g., `ReadOnlyHint` annotation, required fields)
+  3. Table-driven behavioral tests with various scenarios
+- **Running:** `go test ./pkg/github -v` for specific package, or `script/test` for full suite
 
 ### Toolsnaps (Tool Schema Snapshots)
 
-- Every MCP tool has a JSON schema snapshot in `pkg/github/__toolsnaps__/*.snap`
-- Tests fail if current schema differs from snapshot (shows diff)
-- To update after intentional changes: `UPDATE_TOOLSNAPS=true go test ./...`
-- **MUST commit updated .snap files** - they document API changes
-- Missing snapshots cause CI failure
+Toolsnaps are version-controlled JSON schema snapshots that document the MCP tool API surface:
+
+- **Location:** Every MCP tool has a snapshot in `pkg/github/__toolsnaps__/*.snap`
+- **Purpose:** Prevent accidental API changes; serve as documentation for what each tool exposes
+- **Validation:** Tests fail if current schema differs from snapshot (shows git-style diff)
+- **Updating:** After intentional schema changes, run `UPDATE_TOOLSNAPS=true go test ./...` to regenerate
+- **Committing:** **ALWAYS commit updated .snap files** with your code changes - they're part of the API contract
+- **CI Check:** Missing or outdated snapshots cause CI failures (when `GITHUB_ACTIONS=true`)
+- **Pattern:** See test files for the standard pattern: test snapshot first, then test behavior
 
 ### End-to-End Tests
 
