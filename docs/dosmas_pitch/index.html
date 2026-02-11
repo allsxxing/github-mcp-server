@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOMAIN & WEBSITE LAUNCH | DOS MAS v3.1</title>
+    <title>DOMAIN & WEBSITE LAUNCH | DOS MAS v3.2</title>
     <meta name="description" content="Operations & Logistics Deck for DOS MAS Bar/Lounge.">
 
     <!--
     GJ BORDALLO // @allsxxing
     PROJECT: DOS MAS LAUNCH
-    VERSION: 3.1 (Logo Avatar + Plan Table Revamp & Font Weight Increase)
+    VERSION: 3.3 (Added Sonic Announcer TTS & Event Architect)
     -->
     <script>
         function configureTailwind() {
@@ -40,6 +40,7 @@
                             animation: {
                                 'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
                                 'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                                'sound-wave': 'wave 1s infinite ease-in-out',
                             },
                             keyframes: {
                                 shake: {
@@ -47,6 +48,10 @@
                                     '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
                                     '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
                                     '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+                                },
+                                wave: {
+                                    '0%, 100%': { height: '10%' },
+                                    '50%': { height: '100%' }
                                 }
                             }
                         }
@@ -86,6 +91,16 @@
             60% { content: ' ...'; }
             80%, 100% { content: ' ....'; }
         }
+        /* Sound Wave Animation */
+        .bar {
+            width: 4px;
+            background: currentColor;
+            animation: wave 1s infinite ease-in-out;
+        }
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col bg-vm-light text-gray-800 dark:bg-dm-dark dark:text-gray-200 font-sans selection:bg-vm-red selection:text-white dark:selection:bg-dm-teal dark:selection:text-black">
@@ -96,7 +111,7 @@
                 <!-- Brand -->
                 <div class="flex items-center group cursor-pointer" onclick="window.scrollTo(0,0)">
                     <span class="text-2xl font-black tracking-tighter dark:text-white text-gray-900 group-hover:text-vm-red dark:group-hover:text-dm-teal transition-colors">DOS MAS</span>
-                    <span class="text-[10px] ml-2 px-1.5 py-0.5 rounded border font-mono border-vm-red text-vm-red dark:border-dm-teal dark:text-dm-teal">v3.1</span>
+                    <span class="text-[10px] ml-2 px-1.5 py-0.5 rounded border font-mono border-vm-red text-vm-red dark:border-dm-teal dark:text-dm-teal">v3.3</span>
                 </div>
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-6 text-xs font-bold uppercase tracking-wide">
@@ -126,7 +141,9 @@
                 <!-- LOGO AVATAR -->
                 <div class="relative group">
                     <div class="absolute -inset-1 bg-gradient-to-r from-vm-red to-vm-jade dark:from-dm-pink dark:to-dm-teal rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                    <img src="AIArt-DosMasDice-001-6.png" alt="Dos Mas Logo" class="relative w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white dark:border-dm-dark shadow-2xl object-cover bg-white">
+                    <div class="relative w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white dark:border-dm-dark shadow-2xl overflow-hidden bg-white flex items-center justify-center">
+                         <i class="fas fa-dice text-4xl text-gray-300"></i>
+                    </div>
                 </div>
 
                 <div>
@@ -193,8 +210,6 @@
                                 <td class="py-4 text-green-500 font-bold">0%</td>
                                 <td class="py-4 text-green-500 font-bold">0%</td>
                             </tr>
-
-                            <!-- NEW STRATEGIC FEATURES -->
                             <tr class="bg-vm-blue/5 dark:bg-dm-teal/5">
                                 <td class="py-4 pl-2 font-sans font-bold">ACCEPT PAYMENTS</td>
                                 <td class="py-4 opacity-30"><i class="fas fa-times"></i></td>
@@ -216,16 +231,8 @@
                                 <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
                                 <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
                             </tr>
-                            <!-- Existing Features -->
                             <tr>
                                 <td class="py-4 pl-2 font-sans">CSS/Code Inj.</td>
-                                <td class="py-4 opacity-30"><i class="fas fa-times"></i></td>
-                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
-                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
-                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td class="py-4 pl-2 font-sans">Pop-ups</td>
                                 <td class="py-4 opacity-30"><i class="fas fa-times"></i></td>
                                 <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
                                 <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
@@ -302,10 +309,6 @@
                             <i class="fas fa-arrow-up mt-1"></i>
                             <span><strong>Action:</strong> Upgrade to PLUS ($421.20/yr).</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-arrow-up mt-1"></i>
-                            <span><strong>Tech:</strong> Native checkout, Inventory sync, 0% fees.</span>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -360,9 +363,6 @@
                     <p class="text-sm opacity-80 leading-relaxed mb-4">
                         Squarespace Business is the optimal MVP vehicle for the East End market, balancing visual impact with low overhead. Migrating the asset (domain) to Cloudflare secures the brand's digital IP at wholesale cost.
                     </p>
-                    <a href="https://investors.squarespace.com/" target="_blank" class="text-xs font-bold underline decoration-vm-red dark:decoration-dm-teal hover:opacity-70">
-                        View Squarespace 10-K Report <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
                 </div>
                 <!-- Risk Factors -->
                 <div class="p-6 bg-white dark:bg-dm-dark-panel border dark:border-gray-700 rounded-lg shadow-md hover:shadow-xl transition-shadow">
@@ -374,9 +374,6 @@
                         <li><strong>Platform Lock-in:</strong> Squarespace prices historically rise every ~24 months.</li>
                         <li><strong>Dependence:</strong> Traffic relies heavily on Meta (IG/FB) algorithms. The website serves purely as a validation/menu node.</li>
                     </ul>
-                    <a href="https://investors.squarespace.com/" target="_blank" class="text-xs font-bold underline decoration-vm-red dark:decoration-dm-teal hover:opacity-70">
-                        Squarespace Investor Relations <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
                 </div>
                 <!-- Financial Tools -->
                 <div class="p-6 bg-white dark:bg-dm-dark-panel border dark:border-gray-700 rounded-lg shadow-md hover:shadow-xl transition-shadow">
@@ -387,9 +384,6 @@
                     <p class="text-sm opacity-80 leading-relaxed mb-4">
                         Using <strong>Mercury</strong> or <strong>Privacy.com</strong> allows creation of merchant-locked virtual cards. This prevents "subscription creep" and secures the primary bank account from web-based vendor hacks.
                     </p>
-                    <a href="https://mercury.com/" target="_blank" class="text-xs font-bold underline decoration-vm-red dark:decoration-dm-teal hover:opacity-70">
-                        Explore Mercury <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
                 </div>
             </div>
         </section>
@@ -402,7 +396,8 @@
                 </div>
                 <i class="fas fa-bolt text-2xl text-yellow-400 animate-pulse"></i>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <!-- GRID ROW 1: CREATIVE ASSETS -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
 
                 <!-- Prompt Remix -->
                 <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-xl border-2 border-vm-red dark:border-dm-pink shadow-xl relative overflow-hidden group">
@@ -428,8 +423,8 @@
                             <label class="block text-xs font-bold mb-2 uppercase opacity-70">2. Select Prompt Variation</label>
                             <div class="flex gap-2">
                                 <select id="vibeSelect" class="flex-grow p-3 text-sm rounded bg-gray-50 dark:bg-black/20 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-vm-red dark:focus:border-dm-pink">
-                                    <option value="opt5" selected>#5 REFINED: ¿CÓMO SE DICE? (Default)</option>
-                                    <option value="opt1">#1 WASHED (ái)MERICANA</option>
+                                    <option value="opt5" selected>#5 REFINED: &iquest;C&Oacute;MO SE DICE? (Default)</option>
+                                    <option value="opt1">#1 WASHED (&aacute;i)MERICANA</option>
                                     <option value="opt2">#2 TRADITIONAL TATTOO</option>
                                     <option value="opt3">#3 STYLIZED SNAKE EYES</option>
                                     <option value="opt4">#4 VINTAGE & VECTORIZED</option>
@@ -465,7 +460,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Analyst Bot & Cocktail -->
+                <!-- Analyst Bot & Cocktail & Social Snap -->
                 <div class="space-y-10">
                     <!-- Analyst Bot -->
                     <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg flex flex-col">
@@ -517,13 +512,106 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Social Snap Analyst -->
+                    <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg flex flex-col relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-vm-jade dark:bg-dm-teal text-white dark:text-black text-[10px] font-bold px-3 py-1">V3.2 FEATURE</div>
+                         <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white text-xl">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl leading-none">SOCIAL SNAP ANALYST</h3>
+                                <p class="text-xs font-mono opacity-60 mt-1">GENERATE CAPTIONS FROM IMAGES</p>
+                            </div>
+                        </div>
+                         <div class="space-y-4 flex-grow">
+                            <div>
+                                <label class="block text-xs font-bold mb-2 uppercase opacity-70">Upload Photo</label>
+                                <input type="file" id="socialSnapInput" accept="image/*" class="w-full text-xs file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700 dark:file:bg-purple-500 dark:file:text-white cursor-pointer">
+                            </div>
+                             <button id="btnSocialSnap" class="w-full py-3 font-bold rounded bg-purple-600 text-white hover:bg-purple-700 transition-colors">
+                                GENERATE CAPTIONS
+                            </button>
+                            <div id="socialSnapOutput" class="h-32 overflow-y-auto p-4 rounded bg-gray-50 dark:bg-black/30 text-sm font-mono whitespace-pre-line border border-dashed border-gray-300 dark:border-gray-600">
+                                Waiting for image...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- GRID ROW 2: NEW FEATURES (TTS & EVENT PLANNER) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                <!-- NEW: SONIC ANNOUNCER (TTS) -->
+                <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-xl border-2 border-orange-500 shadow-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-orange-500 text-white text-[10px] font-bold px-3 py-1 flex items-center gap-1">
+                        <i class="fas fa-volume-up"></i> GEMINI AUDIO
+                    </div>
+
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white text-xl">
+                            <i class="fas fa-microphone-lines"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl leading-none">THE SONIC ANNOUNCER</h3>
+                            <p class="text-xs font-mono opacity-60 mt-1">TEXT-TO-SPEECH DJ SCRIPTS</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold mb-2 uppercase opacity-70">Announcement Topic / Vibe</label>
+                            <input type="text" id="ttsInput" placeholder="e.g. 'Last Call for Alcohol, use slang'"
+                                class="w-full p-3 rounded bg-gray-50 dark:bg-black/20 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-orange-500">
+                        </div>
+                        <button id="btnTTS" class="w-full py-4 font-black tracking-widest rounded bg-orange-500 text-white hover:bg-orange-600 transition-all shadow-lg flex items-center justify-center gap-3">
+                            <i class="fas fa-play text-xl"></i>
+                            <span>GENERATE & SPEAK</span>
+                        </button>
+                        <!-- Audio Visualizer (Fake) & Player -->
+                        <div id="audioContainer" class="hidden flex-col items-center justify-center p-6 bg-gray-900 rounded-lg text-white">
+                            <div class="flex gap-1 h-8 items-end mb-4 text-orange-500">
+                                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            </div>
+                            <div id="ttsScript" class="text-xs font-mono text-center italic opacity-80 mb-4">
+                                "Script will appear here..."
+                            </div>
+                            <audio id="audioPlayer" controls class="w-full h-8"></audio>
+                        </div>
+                    </div>
+                </div>
+                <!-- NEW: EVENT ARCHITECT -->
+                <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-vm-jade dark:bg-dm-teal text-white dark:text-black text-[10px] font-bold px-3 py-1">NEW</div>
+
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xl">
+                            <i class="fas fa-calendar-star"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl leading-none">EVENT ARCHITECT</h3>
+                            <p class="text-xs font-mono opacity-60 mt-1">THEME, MUSIC & DRINKS PLANNER</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 flex-grow">
+                        <div>
+                            <label class="block text-xs font-bold mb-2 uppercase opacity-70">Occasion or Date</label>
+                            <input type="text" id="eventInput" placeholder="e.g. 'Cinco de Mayo but Goth'"
+                                class="w-full p-3 rounded bg-gray-50 dark:bg-black/20 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-indigo-600">
+                        </div>
+                        <button id="btnEvent" class="w-full py-3 font-bold rounded bg-indigo-600 text-white hover:bg-indigo-700 transition-colors">
+                            PLAN EVENT
+                        </button>
+                        <div id="eventOutput" class="h-64 overflow-y-auto p-4 rounded bg-gray-50 dark:bg-black/30 text-sm font-mono whitespace-pre-line border border-dashed border-gray-300 dark:border-gray-600">
+                            Waiting for brief...
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
     <footer class="border-t py-12 bg-vm-panel dark:bg-dm-dark-panel border-gray-300 dark:border-gray-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-[10px] font-mono opacity-40 mb-4">INTERNAL USE ONLY. DOS MAS PITCH DECK v3.1</p>
+            <p class="text-[10px] font-mono opacity-40 mb-4">INTERNAL USE ONLY. DOS MAS PITCH DECK v3.3</p>
             <div class="flex justify-center space-x-6 text-xl opacity-60">
                 <a href="https://www.instagram.com/bardosmas" target="_blank" class="hover:text-vm-red dark:hover:text-dm-teal transition-transform hover:scale-110"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.tiktok.com/@bardosmas" target="_blank" class="hover:text-vm-red dark:hover:text-dm-teal transition-transform hover:scale-110"><i class="fab fa-tiktok"></i></a>
@@ -548,11 +636,11 @@
         const userBudgetLabels = ['MVP (Lean)', 'Target (E-Comm)', 'Advanced'];
         // --- Prompt Dictionary ---
         const promptMap = {
-            'opt1': "American Traditional tattoo art logo: Two dice showing 'snake eyes,' rendered in a rugged, dark brown vintage wash with bold black outlines and shading. Arched above: 'DOS MÁS' (with accent on 'A') in vintage black serif. Arched below: 'HOUSTON EAST END' in matching font. Clean white background.",
-            'opt2': "A vintage-style logo, embodying American Traditional tattoo artistry. Features two high-quality, vectorized dice deliberately showing 'snake eyes,' colored with a deep, worn, dark brown wash, strong black linework, and classic tattoo shading. The words 'DOS MÁS' (with an accent over the 'A') arc gracefully above in a bold, traditional black serif font, mirrored by 'HOUSTON EAST END' arcing below. Isolated on white.",
-            'opt3': "Graphic emblem in American Traditional tattoo aesthetic. Central element: two stylized dice, displaying 'snake eyes,' with a rich, dark brown, aged color tone, sharp black outlines, and textural shading. Text element 1: 'DOS MÁS' (A with accent), arched above, in a robust, old-school black serif typeface. Text element 2: 'HOUSTON EAST END,' arched below, complementing the main text. High-resolution, on a pure white backdrop.",
-            'opt4': "Subject: Two dice, 'snake eyes' (one pip on each die). Style: American Traditional tattoo art, vintage logo, emblem, vectorized, high quality. Colors: Dark brown, rugged brown, worn brown, black outlines, black shading, antique coloration. Text (Top Arch): 'DOS MÁS' (with accent mark over 'A'), bold serif font, black text. Text (Bottom Arch): 'HOUSTON EAST END', bold serif font, black text. Composition: Arched text above and below central dice, isolated. Background: White background, clean, minimalist. Mood: Classic, bold, strong, authentic. Details: Heavy linework, saturated colors, strong contrast, clean edges.",
-            'opt5': "A bold logo emblem designed in the American Traditional tattoo art style. The centerpiece features two dice, angled to prominently display 'snake eyes' (a single pip on each). The dice are colored with a rugged, worn, darkened brown vintage wash, defined by heavy black outlines and deep, saturated black shading, giving them a classic, inked look. Arched directly above the dice is the text 'DOS MÁS' in a bold, black, vintage-style serif font, with an artistic tilde accent mark over the 'A'. Arched below the dice in a matching font is the text 'HOUSTON EAST END'. The entire design is isolated on a clean white background. 1:1 aspect ratio."
+            'opt1': "American Traditional tattoo art logo: Two dice showing 'snake eyes,' rendered in a rugged, dark brown vintage wash with bold black outlines and shading. Arched above: 'DOS M\u00C1S' (with accent on 'A') in vintage black serif. Arched below: 'HOUSTON EAST END' in matching font. Clean white background.",
+            'opt2': "A vintage-style logo, embodying American Traditional tattoo artistry. Features two high-quality, vectorized dice deliberately showing 'snake eyes,' colored with a deep, worn, dark brown wash, strong black linework, and classic tattoo shading. The words 'DOS M\u00C1S' (with an accent over the 'A') arc gracefully above in a bold, traditional black serif font, mirrored by 'HOUSTON EAST END' arcing below. Isolated on white.",
+            'opt3': "Graphic emblem in American Traditional tattoo aesthetic. Central element: two stylized dice, displaying 'snake eyes,' with a rich, dark brown, aged color tone, sharp black outlines, and textural shading. Text element 1: 'DOS M\u00C1S' (A with accent), arched above, in a robust, old-school black serif typeface. Text element 2: 'HOUSTON EAST END,' arched below, complementing the main text. High-resolution, on a pure white backdrop.",
+            'opt4': "Subject: Two dice, 'snake eyes' (one pip on each die). Style: American Traditional tattoo art, vintage logo, emblem, vectorized, high quality. Colors: Dark brown, rugged brown, worn brown, black outlines, black shading, antique coloration. Text (Top Arch): 'DOS M\u00C1S' (with accent mark over 'A'), bold serif font, black text. Text (Bottom Arch): 'HOUSTON EAST END', bold serif font, black text. Composition: Arched text above and below central dice, isolated. Background: White background, clean, minimalist. Mood: Classic, bold, strong, authentic. Details: Heavy linework, saturated colors, strong contrast, clean edges.",
+            'opt5': "A bold logo emblem designed in the American Traditional tattoo art style. The centerpiece features two dice, angled to prominently display 'snake eyes' (a single pip on each). The dice are colored with a rugged, worn, darkened brown vintage wash, defined by heavy black outlines and deep, saturated black shading, giving them a classic, inked look. Arched directly above the dice is the text 'DOS M\u00C1S' in a bold, black, vintage-style serif font, with an artistic tilde accent mark over the 'A'. Arched below the dice in a matching font is the text 'HOUSTON EAST END'. The entire design is isolated on a clean white background. 1:1 aspect ratio."
         };
         let costChartInstance = null;
         let budgetChartInstance = null;
@@ -735,7 +823,7 @@
                 Answer the user's question confidently based on this data. Be concise, professional, and persuasive. If asked about risks, mention reliance on 3rd party apps (Resy) and Squarespace price hikes.`;
                 try {
                     const resultText = await callGeminiText(systemPrompt + "\n\nUser Question: " + userQ);
-                    botResult.innerHTML = resultText.replace(/\*\*/g, '').replace(/\*/g, '•').replace(/\n/g, '<br>');
+                    botResult.innerHTML = resultText.replace(/\*\*/g, '').replace(/\*/g, '\u2022').replace(/\n/g, '<br>');
                 } catch (e) {
                     botResult.innerText = "Error analyzing pitch data.";
                 }
@@ -743,12 +831,123 @@
                 askBtn.disabled = false;
                 askBtn.innerText = "ANALYZE";
             });
+            // 5. Social Snap Analyst
+            const snapBtn = document.getElementById('btnSocialSnap');
+            const snapInput = document.getElementById('socialSnapInput');
+            const snapResult = document.getElementById('socialSnapOutput');
+            snapBtn.addEventListener('click', async () => {
+                const file = snapInput.files[0];
+                if (!file) {
+                    snapResult.innerText = "Please upload an image first.";
+                    return;
+                }
+                snapBtn.disabled = true;
+                snapBtn.innerText = "ANALYZING IMAGE...";
+                snapResult.innerHTML = '<span class="text-purple-500 loading-dots">Scanning Visuals</span>';
+                try {
+                    const base64Img = await readFileAsBase64(file);
+
+                    const systemPrompt = `You are the social media manager for DOS MAS, an "Industrial Chic" bar in Houston's East End.
+                    The vibe is gritty, neon, concrete, and high energy.
+
+                    Analyze the uploaded image. Write 3 distinct Instagram captions for it:
+                    1. HYPE: Energetic, short, punchy.
+                    2. CHILL: Laid back, inviting.
+                    3. MYSTERIOUS: Cryptic, alluring.
+
+                    Use relevant emojis. Format clearly.`;
+                    const resultText = await callGeminiText(systemPrompt, base64Img);
+                    snapResult.innerHTML = resultText.replace(/\n/g, '<br>');
+                } catch (e) {
+                    console.error(e);
+                    snapResult.innerText = "Error analyzing image. Ensure it is a valid format.";
+                }
+                snapBtn.disabled = false;
+                snapBtn.innerText = "GENERATE CAPTIONS";
+            });
+            // 6. Sonic Announcer (TTS)
+            const btnTTS = document.getElementById('btnTTS');
+            const ttsInput = document.getElementById('ttsInput');
+            const audioContainer = document.getElementById('audioContainer');
+            const audioPlayer = document.getElementById('audioPlayer');
+            const ttsScript = document.getElementById('ttsScript');
+            btnTTS.addEventListener('click', async () => {
+                const text = ttsInput.value.trim();
+                if (!text) return;
+                btnTTS.disabled = true;
+                btnTTS.innerHTML = '<span class="loading-dots">WRITING SCRIPT</span>';
+                audioContainer.classList.add('hidden');
+                try {
+                    // Step 1: Generate Script
+                    const scriptPrompt = `You are the DJ announcer for DOS MAS, a cool, gritty bar in Houston.
+                    Write a VERY short, punchy, 1-sentence announcement script based on this request: "${text}".
+                    Keep it slang-heavy and hype. No hashtags.`;
+
+                    const generatedScript = await callGeminiText(scriptPrompt);
+                    ttsScript.innerText = `"${generatedScript}"`;
+                    btnTTS.innerHTML = '<span class="loading-dots">GENERATING AUDIO</span>';
+                    // Step 2: Call TTS
+                    const base64Audio = await callGeminiTTS(generatedScript);
+
+                    // Step 3: Play
+                    const audioBlob = convertPCMToWav(base64Audio);
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    audioPlayer.src = audioUrl;
+                    audioContainer.classList.remove('hidden');
+                    audioPlayer.play();
+                } catch(e) {
+                    console.error(e);
+                    alert("Audio generation failed.");
+                }
+                btnTTS.disabled = false;
+                btnTTS.innerHTML = '<i class="fas fa-play text-xl"></i><span>GENERATE & SPEAK</span>';
+            });
+            // 7. Event Architect
+            const btnEvent = document.getElementById('btnEvent');
+            const eventInput = document.getElementById('eventInput');
+            const eventOutput = document.getElementById('eventOutput');
+            btnEvent.addEventListener('click', async () => {
+                const occasion = eventInput.value.trim();
+                if(!occasion) return;
+                btnEvent.disabled = true;
+                btnEvent.innerText = "PLANNING...";
+                eventOutput.innerHTML = '<span class="text-indigo-500 loading-dots">Curating Vibes</span>';
+                try {
+                    const prompt = `Plan a one-night event for DOS MAS (Industrial/Neon Bar) based on: "${occasion}".
+
+                    Output format:
+                    **TITLE:** [Cool Name]
+                    **VIBE:** [2 words]
+                    **DECOR:** [1 sentence cheap but cool idea]
+                    **PLAYLIST:** [3 tracks]
+                    **DRINK:** [Name + 1 ingredient]`;
+                    const result = await callGeminiText(prompt);
+                    eventOutput.innerHTML = result.replace(/\*\*/g, '').replace(/\n/g, '<br>');
+                } catch(e) {
+                    eventOutput.innerText = "Planner busy.";
+                }
+                btnEvent.disabled = false;
+                btnEvent.innerText = "PLAN EVENT";
+            });
         }
         // --- API Helpers ---
-        async function callGeminiText(prompt) {
+        async function callGeminiText(prompt, imageBase64 = null) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ parts: [{ text: prompt }] }] };
-            const res = await fetch(url, { method: 'POST', body: JSON.stringify(payload) });
+
+            const parts = [{ text: prompt }];
+
+            if (imageBase64) {
+                const base64Clean = imageBase64.split(',')[1];
+                parts.push({
+                    inlineData: {
+                        mimeType: "image/png",
+                        data: base64Clean
+                    }
+                });
+            }
+            const payload = { contents: [{ parts: parts }] };
+
+            const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             const data = await res.json();
             return data.candidates[0].content.parts[0].text;
         }
@@ -766,23 +965,73 @@
                 contents: [{ parts: parts }],
                 generationConfig: { responseModalities: ["IMAGE"] }
             };
-            const delays = [1000, 2000, 4000];
-            for (let i = 0; i < delays.length; i++) {
-                try {
-                    const res = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (!res.ok) throw new Error(res.statusText);
-                    const data = await res.json();
-                    const resultImage = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
-                    if (!resultImage) throw new Error("No image in response");
-                    return `data:image/png;base64,${resultImage}`;
-                } catch (e) {
-                    if (i === delays.length - 1) throw e;
-                    await new Promise(r => setTimeout(r, delays[i]));
+            const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const data = await res.json();
+            const resultImage = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
+            if (!resultImage) throw new Error("No image in response");
+            return `data:image/png;base64,${resultImage}`;
+        }
+        async function callGeminiTTS(text) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: text }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Fenrir" } // Deep, industrial voice
+                        }
+                    }
                 }
+            };
+
+            const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const data = await res.json();
+            return data.candidates[0].content.parts[0].inlineData.data;
+        }
+        function convertPCMToWav(base64PCM) {
+            const binaryString = window.atob(base64PCM);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            const pcm16 = new Int16Array(bytes.buffer);
+
+            // Create WAV header
+            const numChannels = 1;
+            const sampleRate = 24000;
+            const byteRate = sampleRate * numChannels * 2;
+            const blockAlign = numChannels * 2;
+            const buffer = new ArrayBuffer(44 + pcm16.length * 2);
+            const view = new DataView(buffer);
+            // RIFF chunk descriptor
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + pcm16.length * 2, true);
+            writeString(view, 8, 'WAVE');
+
+            // fmt sub-chunk
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true); // PCM format
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, byteRate, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, 16, true); // bits per sample
+            // data sub-chunk
+            writeString(view, 36, 'data');
+            view.setUint32(40, pcm16.length * 2, true);
+            // Write PCM data
+            const offset = 44;
+            for (let i = 0; i < pcm16.length; i++) {
+                view.setInt16(offset + i * 2, pcm16[i], true);
+            }
+            return new Blob([view], { type: 'audio/wav' });
+        }
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
             }
         }
         function readFileAsBase64(file) {
