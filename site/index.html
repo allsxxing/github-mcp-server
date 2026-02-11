@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOMAIN & WEBSITE LAUNCH | DOS MAS v3.1</title>
+    <meta name="description" content="Operations & Logistics Deck for DOS MAS Bar/Lounge.">
+
+    <!--
+    GJ BORDALLO // @allsxxing
+    PROJECT: DOS MAS LAUNCH
+    VERSION: 3.1 (Logo Avatar + Plan Table Revamp & Font Weight Increase)
+    -->
+    <script>
+        function configureTailwind() {
+            if (typeof tailwind !== 'undefined') {
+                tailwind.config = {
+                    darkMode: 'media',
+                    theme: {
+                        extend: {
+                            colors: {
+                                // Dark Mode (Graphite & Easter Neons)
+                                'dm-dark': '#1a1a1a',
+                                'dm-dark-panel': '#242424',
+                                'dm-teal': '#00CED1',
+                                'dm-pink': '#FFB7C5',
+                                'dm-gold': '#FFD700',
+
+                                // Light Mode (Vintage Earth & Pastels)
+                                'vm-light': '#F0EAD6', // Eggshell
+                                'vm-panel': '#E6DFCC',
+                                'vm-red': '#CC4E5C',   // Burnt Red
+                                'vm-blue': '#B0E0E6',  // Powder Blue
+                                'vm-jade': '#00A86B',  // Jade Green
+                            },
+                            fontFamily: {
+                                sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+                                mono: ['Courier New', 'monospace'],
+                            },
+                            animation: {
+                                'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+                                'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                            },
+                            keyframes: {
+                                shake: {
+                                    '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                                    '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                                    '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                                    '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com" onload="configureTailwind()"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Smooth Theme Transition */
+        body { transition: background-color 0.3s ease, color 0.3s ease; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
+
+        @media (prefers-color-scheme: dark) {
+            ::-webkit-scrollbar-thumb:hover { background: #00CED1; }
+        }
+        @media (prefers-color-scheme: light) {
+            ::-webkit-scrollbar-thumb:hover { background: #CC4E5C; }
+        }
+        .chart-wrapper { position: relative; height: 350px; width: 100%; }
+
+        /* Loader */
+        .loading-dots:after {
+            content: ' .';
+            animation: dots 1s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: ' .'; }
+            40% { content: ' ..'; }
+            60% { content: ' ...'; }
+            80%, 100% { content: ' ....'; }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col bg-vm-light text-gray-800 dark:bg-dm-dark dark:text-gray-200 font-sans selection:bg-vm-red selection:text-white dark:selection:bg-dm-teal dark:selection:text-black">
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md border-b shadow-sm bg-vm-light/90 border-vm-red/20 dark:bg-dm-dark/90 dark:border-dm-teal/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand -->
+                <div class="flex items-center group cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="text-2xl font-black tracking-tighter dark:text-white text-gray-900 group-hover:text-vm-red dark:group-hover:text-dm-teal transition-colors">DOS MAS</span>
+                    <span class="text-[10px] ml-2 px-1.5 py-0.5 rounded border font-mono border-vm-red text-vm-red dark:border-dm-teal dark:text-dm-teal">v3.1</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6 text-xs font-bold uppercase tracking-wide">
+                    <a href="#plans" class="hover:text-vm-red dark:hover:text-dm-teal transition-colors">Platform</a>
+                    <a href="#roadmap" class="hover:text-vm-red dark:hover:text-dm-teal transition-colors">Roadmap</a>
+                    <a href="#budget" class="hover:text-vm-red dark:hover:text-dm-teal transition-colors">Budget</a>
+                    <a href="#strategy" class="hover:text-vm-red dark:hover:text-dm-teal transition-colors">Strategy</a>
+
+                    <a href="#ai-lab" class="px-3 py-1.5 rounded border transition-all flex items-center gap-2
+                        border-vm-jade text-vm-jade hover:bg-vm-jade hover:text-white
+                        dark:border-dm-pink dark:text-dm-pink dark:hover:bg-dm-pink dark:hover:text-dm-dark">
+                        <i class="fas fa-magic"></i> AI LAB
+                    </a>
+                </div>
+                <!-- Socials -->
+                <div class="hidden md:flex space-x-4 border-l pl-6 border-gray-300 dark:border-gray-700 opacity-60">
+                    <a href="https://www.instagram.com/bardosmas" target="_blank" class="hover:text-vm-red dark:hover:text-dm-teal transition-transform hover:scale-110"><i class="fab fa-instagram text-lg"></i></a>
+                    <a href="https://www.tiktok.com/@bardosmas" target="_blank" class="hover:text-vm-red dark:hover:text-dm-teal transition-transform hover:scale-110"><i class="fab fa-tiktok text-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="py-16 border-b bg-vm-panel border-gray-300 dark:bg-dm-dark-panel dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-end">
+            <div class="flex items-center gap-8">
+                <!-- LOGO AVATAR -->
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-vm-red to-vm-jade dark:from-dm-pink dark:to-dm-teal rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    <img src="AIArt-DosMasDice-001-6.png" alt="Dos Mas Logo" class="relative w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white dark:border-dm-dark shadow-2xl object-cover bg-white">
+                </div>
+
+                <div>
+                    <h1 class="text-5xl md:text-6xl font-black mb-2 tracking-tighter leading-none">DOMAIN &<br>WEBSITE LAUNCH</h1>
+                    <p class="text-xl font-mono mb-6 text-vm-red dark:text-dm-teal">@BARDOSMAS | <a href="https://bardosmas.co" target="_blank" class="hover:underline">bardosmas.co</a></p>
+                    <div class="flex flex-wrap gap-4 text-xs font-bold uppercase opacity-70">
+                        <span class="flex items-center gap-2"><i class="fas fa-map-pin"></i> Houston East End</span>
+                        <span class="flex items-center gap-2"><i class="fas fa-calendar-check"></i> Spring 2026</span>
+                        <span class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Liquor License Pending</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 md:mt-0 text-right">
+                <a href="mailto:hola@bardosmas.co" class="text-2xl font-bold hover:underline decoration-vm-red dark:decoration-dm-teal underline-offset-4">hola@bardosmas.co</a>
+                <p class="text-xs font-mono opacity-50 mt-1">SECURE OPS CHANNEL</p>
+                <div class="flex gap-4 mt-4 justify-end text-lg opacity-80">
+                    <a href="https://www.facebook.com/@holaDosMas" target="_blank" title="Facebook" class="hover:text-vm-red dark:hover:text-dm-teal"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/bardosmas" target="_blank" title="Instagram" class="hover:text-vm-red dark:hover:text-dm-teal"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@holadosmas" target="_blank" title="YouTube" class="hover:text-vm-red dark:hover:text-dm-teal"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@bardosmas" target="_blank" title="TikTok" class="hover:text-vm-red dark:hover:text-dm-teal"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+        <!-- 1. PLATFORM ANALYSIS -->
+        <section id="plans" class="scroll-mt-28">
+            <div class="flex items-baseline justify-between mb-8 border-b pb-4 border-gray-200 dark:border-gray-700">
+                <h2 class="text-3xl font-black uppercase tracking-tight">01. SQUARESPACE PRICE PLANS COMPARISON</h2>
+                <a href="https://www.squarespace.com/pricing" target="_blank" class="font-mono text-xs opacity-50 hover:text-vm-red dark:hover:text-dm-teal hover:underline flex items-center gap-2">
+                    SOURCE: SQUARESPACE PRICING <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Comparison Table -->
+                <div class="bg-white dark:bg-dm-dark-panel p-8 rounded-lg shadow-xl border border-gray-100 dark:border-gray-800 overflow-x-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-lg">Hospitality Feature Breakdown</h3>
+                        <span class="text-[10px] font-bold uppercase bg-vm-jade text-white px-2 py-1 rounded tracking-wider">Annual Billing Rate</span>
+                    </div>
+
+                    <table class="w-full text-xs md:text-sm text-left border-collapse">
+                        <thead>
+                            <tr class="font-mono opacity-50 border-b dark:border-gray-700">
+                                <th class="pb-4 pr-2 w-1/4">FEATURE</th>
+                                <th class="pb-4 pr-2 text-base font-black w-1/6">BASIC</th>
+                                <th class="pb-4 pr-2 text-vm-red dark:text-dm-teal text-xl font-black w-1/6">CORE</th>
+                                <th class="pb-4 pr-2 text-base font-black w-1/6">PLUS</th>
+                                <th class="pb-4 text-base font-black w-1/6">ADV</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y dark:divide-gray-800 font-mono">
+                            <tr class="bg-gray-50/50 dark:bg-black/20">
+                                <td class="py-5 font-sans font-black text-sm">Monthly Cost</td>
+                                <td class="py-5 text-lg font-black">$14.40</td>
+                                <td class="py-5 text-vm-red dark:text-dm-teal font-black text-2xl">$20.70</td>
+                                <td class="py-5 text-lg font-black">$35.10</td>
+                                <td class="py-5 text-lg font-black">$89.10</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 pl-2 font-sans">Transaction Fee</td>
+                                <td class="py-4 opacity-30 text-xs">N/A</td>
+                                <td class="py-4 text-red-500 font-bold">3%</td>
+                                <td class="py-4 text-green-500 font-bold">0%</td>
+                                <td class="py-4 text-green-500 font-bold">0%</td>
+                            </tr>
+
+                            <!-- NEW STRATEGIC FEATURES -->
+                            <tr class="bg-vm-blue/5 dark:bg-dm-teal/5">
+                                <td class="py-4 pl-2 font-sans font-bold">ACCEPT PAYMENTS</td>
+                                <td class="py-4 opacity-30"><i class="fas fa-times"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                            </tr>
+                            <tr class="bg-vm-blue/5 dark:bg-dm-teal/5">
+                                <td class="py-4 pl-2 font-sans font-bold">SELL PRODUCTS & SERVICES</td>
+                                <td class="py-4 opacity-30"><i class="fas fa-times"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                            </tr>
+                            <tr class="bg-vm-blue/5 dark:bg-dm-teal/5">
+                                <td class="py-4 pl-2 font-sans font-bold">MARKET YOUR BRAND</td>
+                                <td class="py-4 opacity-50 text-xs">Basic</td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                            </tr>
+                            <!-- Existing Features -->
+                            <tr>
+                                <td class="py-4 pl-2 font-sans">CSS/Code Inj.</td>
+                                <td class="py-4 opacity-30"><i class="fas fa-times"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 pl-2 font-sans">Pop-ups</td>
+                                <td class="py-4 opacity-30"><i class="fas fa-times"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                                <td class="py-4 text-green-500"><i class="fas fa-check"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 pl-2 font-sans">Checkout Domain</td>
+                                <td class="py-4 opacity-30"><i class="fas fa-times"></i></td>
+                                <td class="py-4 opacity-50">Redirect</td>
+                                <td class="py-4 text-green-500">On-Site</td>
+                                <td class="py-4 text-green-500">On-Site</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-6 p-4 bg-vm-light dark:bg-black/30 rounded border border-vm-red/20 dark:border-dm-teal/20 text-xs">
+                        <strong class="text-vm-red dark:text-dm-teal">RECOMMENDATION:</strong> <span class="font-bold">CORE ($20.70)</span> is the MVP sweet spot. Basic ($14.40) lacks the CSS injection needed for our "Industrial Chic" custom fonts. Plus ($35.10) is only viable if merch sales exceed ~$500/mo to offset the $14.40 price hike via fee savings.
+                    </div>
+                </div>
+                <!-- Visualization -->
+                <div class="bg-white dark:bg-dm-dark-panel p-8 rounded-lg shadow-xl border border-gray-100 dark:border-gray-800 flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-lg">Cost Visualization</h3>
+                        <div class="flex space-x-2">
+                            <button onclick="updateChart('annual')" id="btnAnnual" class="text-[10px] font-bold px-3 py-1 rounded bg-vm-red text-white dark:bg-dm-teal dark:text-black transition-all">ANNUAL TOTAL</button>
+                            <button onclick="updateChart('monthly')" id="btnMonthly" class="text-[10px] font-bold px-3 py-1 rounded bg-gray-200 text-black dark:bg-gray-800 dark:text-gray-400 transition-all">MONTHLY RATE</button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                    <p id="chartCaption" class="text-[10px] font-mono text-center mt-4 opacity-50">Total upfront capital required for 12 months of service.</p>
+                </div>
+            </div>
+        </section>
+        <!-- 2. STRATEGIC ROADMAP -->
+        <section id="roadmap" class="scroll-mt-28">
+            <div class="flex items-baseline justify-between mb-8 border-b pb-4 border-gray-200 dark:border-gray-700">
+                <h2 class="text-3xl font-black uppercase tracking-tight">02. Execution Roadmap</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Phase 1 -->
+                <div class="p-6 rounded-lg border-l-4 border-vm-jade dark:border-dm-pink bg-white dark:bg-dm-dark-panel shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-black">PHASE 1: VERIFY</h3>
+                        <span class="text-xs font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">SPRING 2026</span>
+                    </div>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check mt-1 text-vm-jade dark:text-dm-pink"></i>
+                            <span><strong>Launch CORE Plan:</strong> $248.40/yr upfront. Minimal burn.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check mt-1 text-vm-jade dark:text-dm-pink"></i>
+                            <span><strong>Content:</strong> "Vibe-first" landing page. IG Feed sync. PDF Menu.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check mt-1 text-vm-jade dark:text-dm-pink"></i>
+                            <span><strong>Booking:</strong> Direct link to Resy/OpenTable (No internal engine).</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Phase 2 -->
+                <div class="p-6 rounded-lg border-l-4 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-black/20 opacity-75">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-black text-gray-500">PHASE 2: SCALE</h3>
+                        <span class="text-xs font-mono bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">TRIGGER BASED</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-arrow-up mt-1"></i>
+                            <span><strong>Trigger:</strong> Merch sales > $1,600/yr (Fees > Upgrade Cost).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-arrow-up mt-1"></i>
+                            <span><strong>Action:</strong> Upgrade to PLUS ($421.20/yr).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-arrow-up mt-1"></i>
+                            <span><strong>Tech:</strong> Native checkout, Inventory sync, 0% fees.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- 3. FISCAL YEAR 1 BUDGET -->
+        <section id="budget" class="scroll-mt-28">
+            <div class="flex items-baseline justify-between mb-8 border-b pb-4 border-gray-200 dark:border-gray-700">
+                <div>
+                    <h2 class="text-3xl font-black uppercase tracking-tight">03. Fiscal Year 1 Budget</h2>
+                    <p class="font-mono text-xs opacity-50 mt-1">Tiered Projection (Website + Domain)</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- KPI Cards -->
+                <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-lg border-b-4 border-vm-jade dark:border-dm-teal shadow-md transition hover:scale-105">
+                    <div class="text-xs font-mono font-bold opacity-50 mb-2 uppercase">MVP (Lean)</div>
+                    <div class="text-4xl font-black tracking-tight mb-1">~$302</div>
+                    <div class="text-xs font-bold text-gray-500">Business Plan + Domain</div>
+                </div>
+                <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-lg border-b-4 border-vm-red dark:border-dm-pink shadow-md transition hover:scale-105">
+                    <div class="text-xs font-mono font-bold opacity-50 mb-2 uppercase">Target (E-Commerce)</div>
+                    <div class="text-4xl font-black tracking-tight mb-1">~$350</div>
+                    <div class="text-xs font-bold text-gray-500">Commerce Basic + Domain</div>
+                </div>
+                <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-lg border-b-4 border-gray-400 dark:border-gray-600 shadow-md transition hover:scale-105 opacity-80">
+                    <div class="text-xs font-mono font-bold opacity-50 mb-2 uppercase">Advanced</div>
+                    <div class="text-4xl font-black tracking-tight mb-1">~$614</div>
+                    <div class="text-xs font-bold text-gray-500">Commerce Adv + Domain</div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-dm-dark-panel p-8 rounded-lg shadow-xl border border-gray-100 dark:border-gray-800">
+                <div class="chart-wrapper">
+                    <canvas id="budgetBreakdownChart"></canvas>
+                </div>
+            </div>
+        </section>
+        <!-- 4. STRATEGIC OVERVIEW -->
+        <section id="strategy" class="scroll-mt-28">
+            <div class="flex items-baseline justify-between mb-8 border-b pb-4 border-gray-200 dark:border-gray-700">
+                <div>
+                    <h2 class="text-3xl font-black uppercase tracking-tight">04. Strategic Overview</h2>
+                    <p class="font-mono text-xs opacity-50 mt-1">Market Context & Operational Tools</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Exec Summary -->
+                <div class="p-6 bg-white dark:bg-dm-dark-panel border dark:border-gray-700 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-10 h-10 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center mb-4">
+                        <i class="fas fa-chess-king"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3">Executive Summary</h3>
+                    <p class="text-sm opacity-80 leading-relaxed mb-4">
+                        Squarespace Business is the optimal MVP vehicle for the East End market, balancing visual impact with low overhead. Migrating the asset (domain) to Cloudflare secures the brand's digital IP at wholesale cost.
+                    </p>
+                    <a href="https://investors.squarespace.com/" target="_blank" class="text-xs font-bold underline decoration-vm-red dark:decoration-dm-teal hover:opacity-70">
+                        View Squarespace 10-K Report <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <!-- Risk Factors -->
+                <div class="p-6 bg-white dark:bg-dm-dark-panel border dark:border-gray-700 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-10 h-10 rounded-full bg-vm-red text-white flex items-center justify-center mb-4">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3">Risk Factors</h3>
+                    <ul class="text-sm opacity-80 leading-relaxed space-y-2 mb-4">
+                        <li><strong>Platform Lock-in:</strong> Squarespace prices historically rise every ~24 months.</li>
+                        <li><strong>Dependence:</strong> Traffic relies heavily on Meta (IG/FB) algorithms. The website serves purely as a validation/menu node.</li>
+                    </ul>
+                    <a href="https://investors.squarespace.com/" target="_blank" class="text-xs font-bold underline decoration-vm-red dark:decoration-dm-teal hover:opacity-70">
+                        Squarespace Investor Relations <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <!-- Financial Tools -->
+                <div class="p-6 bg-white dark:bg-dm-dark-panel border dark:border-gray-700 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-10 h-10 rounded-full bg-vm-jade text-white flex items-center justify-center mb-4">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3">Financial Tools</h3>
+                    <p class="text-sm opacity-80 leading-relaxed mb-4">
+                        Using <strong>Mercury</strong> or <strong>Privacy.com</strong> allows creation of merchant-locked virtual cards. This prevents "subscription creep" and secures the primary bank account from web-based vendor hacks.
+                    </p>
+                    <a href="https://mercury.com/" target="_blank" class="text-xs font-bold underline decoration-vm-red dark:decoration-dm-teal hover:opacity-70">
+                        Explore Mercury <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- 5. AI LAB -->
+        <section id="ai-lab" class="scroll-mt-28 pb-20">
+            <div class="flex items-baseline justify-between mb-8 border-b pb-4 border-gray-200 dark:border-gray-700">
+                <div>
+                    <h2 class="text-3xl font-black uppercase tracking-tight text-vm-jade dark:text-dm-pink">05. AI Strategy Lab</h2>
+                    <p class="font-mono text-xs opacity-50 mt-1">POWERED BY GEMINI 2.5 FLASH</p>
+                </div>
+                <i class="fas fa-bolt text-2xl text-yellow-400 animate-pulse"></i>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                <!-- Prompt Remix -->
+                <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-xl border-2 border-vm-red dark:border-dm-pink shadow-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-vm-red dark:bg-dm-pink text-white dark:text-black text-[10px] font-bold px-3 py-1">V2.5 UPDATED</div>
+
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-vm-red dark:bg-dm-pink flex items-center justify-center text-white dark:text-black text-xl">
+                            <i class="fas fa-dice"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl leading-none">DICE ROLL REMIX</h3>
+                            <p class="text-xs font-mono opacity-60 mt-1">LOGO GENERATOR & VARIATIONS</p>
+                        </div>
+                    </div>
+                    <div class="space-y-5">
+                        <!-- File Upload -->
+                        <div class="bg-gray-50 dark:bg-black/20 p-4 rounded border border-dashed border-gray-300 dark:border-gray-600">
+                            <label class="block text-xs font-bold mb-2 uppercase opacity-70">1. Reference Image (Optional)</label>
+                            <input type="file" id="logoUpload" accept="image/*" class="w-full text-xs file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-vm-red file:text-white hover:file:bg-vm-red/80 dark:file:bg-dm-pink dark:file:text-black cursor-pointer">
+                        </div>
+                        <!-- Prompt Selection -->
+                        <div>
+                            <label class="block text-xs font-bold mb-2 uppercase opacity-70">2. Select Prompt Variation</label>
+                            <div class="flex gap-2">
+                                <select id="vibeSelect" class="flex-grow p-3 text-sm rounded bg-gray-50 dark:bg-black/20 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-vm-red dark:focus:border-dm-pink">
+                                    <option value="opt5" selected>#5 REFINED: ¿CÓMO SE DICE? (Default)</option>
+                                    <option value="opt1">#1 WASHED (ái)MERICANA</option>
+                                    <option value="opt2">#2 TRADITIONAL TATTOO</option>
+                                    <option value="opt3">#3 STYLIZED SNAKE EYES</option>
+                                    <option value="opt4">#4 VINTAGE & VECTORIZED</option>
+                                </select>
+                                <button id="btnCopyPrompt" class="px-3 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800" title="Copy Raw Prompt">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Action -->
+                        <button id="btnRollDice" class="w-full py-4 font-black tracking-widest rounded bg-vm-red text-white dark:bg-dm-pink dark:text-black hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-3">
+                            <i class="fas fa-dice text-xl"></i>
+                            <span>GENERATE ASSET</span>
+                        </button>
+                        <!-- Result Area -->
+                        <div id="imageContainer" class="aspect-square bg-gray-100 dark:bg-black/40 rounded flex items-center justify-center relative overflow-hidden border border-gray-200 dark:border-gray-700">
+                            <div class="text-center opacity-30">
+                                <i class="fas fa-image text-4xl mb-2"></i>
+                                <p class="text-xs font-mono">ASSET PREVIEW</p>
+                            </div>
+
+                            <!-- Loading Overlay -->
+                            <div id="loadingOverlay" class="absolute inset-0 bg-black/90 hidden flex-col items-center justify-center z-10">
+                                <i class="fas fa-dice text-5xl text-vm-red dark:text-dm-pink animate-shake mb-4"></i>
+                                <span class="text-white text-xs font-mono loading-dots">REMIXING</span>
+                            </div>
+                        </div>
+                        <!-- Share Tools -->
+                        <div id="shareTools" class="hidden flex gap-2">
+                            <button id="btnDownload" class="flex-1 py-3 text-xs font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+                                <i class="fas fa-download mr-2"></i> DOWNLOAD PNG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Analyst Bot & Cocktail -->
+                <div class="space-y-10">
+                    <!-- Analyst Bot -->
+                    <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg flex flex-col">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl leading-none">STRATEGIC ANALYST</h3>
+                                <p class="text-xs font-mono opacity-60 mt-1">ASK QUESTIONS ABOUT THE PITCH</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <label class="block text-xs font-bold mb-2 uppercase opacity-70">Ask the Analyst</label>
+                                <input type="text" id="questionInput" placeholder="e.g. 'Why use Cloudflare for domains?'"
+                                    class="w-full p-3 rounded bg-gray-50 dark:bg-black/20 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500">
+                            </div>
+                            <button id="askBotBtn" class="w-full py-3 font-bold rounded bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                                ANALYZE
+                            </button>
+                            <div id="botResult" class="h-32 overflow-y-auto p-4 rounded bg-gray-50 dark:bg-black/30 text-sm font-mono whitespace-pre-line border border-dashed border-gray-300 dark:border-gray-600">
+                                Ready for questions...
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cocktail Gen -->
+                    <div class="bg-white dark:bg-dm-dark-panel p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg flex flex-col">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-full bg-vm-jade dark:bg-dm-teal flex items-center justify-center text-white dark:text-black text-xl">
+                                <i class="fas fa-cocktail"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl leading-none">CONCEPT MIXER</h3>
+                                <p class="text-xs font-mono opacity-60 mt-1">MENU DEVELOPMENT</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <label class="block text-xs font-bold mb-2 uppercase opacity-70">Flavor Profile / Vibe</label>
+                                <input type="text" id="cocktailInput" placeholder="e.g. 'Smoky Mezcal with a hint of danger'"
+                                    class="w-full p-3 rounded bg-gray-50 dark:bg-black/20 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-vm-jade dark:focus:border-dm-teal">
+                            </div>
+                            <button id="btnCocktail" class="w-full py-3 font-bold rounded border border-vm-jade text-vm-jade dark:border-dm-teal dark:text-dm-teal hover:bg-vm-jade hover:text-white dark:hover:bg-dm-teal dark:hover:text-black transition-colors">
+                                GENERATE RECIPE
+                            </button>
+                            <div id="cocktailOutput" class="h-32 overflow-y-auto p-4 rounded bg-gray-50 dark:bg-black/30 text-sm font-mono whitespace-pre-line border border-dashed border-gray-300 dark:border-gray-600">
+                                Waiting for input...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="border-t py-12 bg-vm-panel dark:bg-dm-dark-panel border-gray-300 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-[10px] font-mono opacity-40 mb-4">INTERNAL USE ONLY. DOS MAS PITCH DECK v3.1</p>
+            <div class="flex justify-center space-x-6 text-xl opacity-60">
+                <a href="https://www.instagram.com/bardosmas" target="_blank" class="hover:text-vm-red dark:hover:text-dm-teal transition-transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@bardosmas" target="_blank" class="hover:text-vm-red dark:hover:text-dm-teal transition-transform hover:scale-110"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/@holaDosMas" target="_blank" class="hover:text-vm-red dark:hover:text-dm-teal transition-transform hover:scale-110"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@holadosmas" target="_blank" class="hover:text-vm-red dark:hover:text-dm-teal transition-transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const apiKey = ""; // Injected by environment
+        // --- Pricing Data (Verified from PDF) ---
+        // BASIC: $14.40/mo * 12 = $172.80
+        // CORE: $20.70/mo * 12 = $248.40
+        // PLUS: $35.10/mo * 12 = $421.20
+        // ADVANCED: $89.10/mo * 12 = $1069.20
+        const annualTotals = [172.80, 248.40, 421.20, 1069.20];
+        const monthlyRates = [14.40, 20.70, 35.10, 89.10];
+        const planLabels = ['BASIC', 'CORE (BIZ)', 'PLUS (COMM)', 'ADVANCED'];
+
+        // --- User Defined Budget Scenarios ---
+        const userBudgetTotals = [302, 350, 614]; // MVP, Target, Advanced
+        const userBudgetLabels = ['MVP (Lean)', 'Target (E-Comm)', 'Advanced'];
+        // --- Prompt Dictionary ---
+        const promptMap = {
+            'opt1': "American Traditional tattoo art logo: Two dice showing 'snake eyes,' rendered in a rugged, dark brown vintage wash with bold black outlines and shading. Arched above: 'DOS MÁS' (with accent on 'A') in vintage black serif. Arched below: 'HOUSTON EAST END' in matching font. Clean white background.",
+            'opt2': "A vintage-style logo, embodying American Traditional tattoo artistry. Features two high-quality, vectorized dice deliberately showing 'snake eyes,' colored with a deep, worn, dark brown wash, strong black linework, and classic tattoo shading. The words 'DOS MÁS' (with an accent over the 'A') arc gracefully above in a bold, traditional black serif font, mirrored by 'HOUSTON EAST END' arcing below. Isolated on white.",
+            'opt3': "Graphic emblem in American Traditional tattoo aesthetic. Central element: two stylized dice, displaying 'snake eyes,' with a rich, dark brown, aged color tone, sharp black outlines, and textural shading. Text element 1: 'DOS MÁS' (A with accent), arched above, in a robust, old-school black serif typeface. Text element 2: 'HOUSTON EAST END,' arched below, complementing the main text. High-resolution, on a pure white backdrop.",
+            'opt4': "Subject: Two dice, 'snake eyes' (one pip on each die). Style: American Traditional tattoo art, vintage logo, emblem, vectorized, high quality. Colors: Dark brown, rugged brown, worn brown, black outlines, black shading, antique coloration. Text (Top Arch): 'DOS MÁS' (with accent mark over 'A'), bold serif font, black text. Text (Bottom Arch): 'HOUSTON EAST END', bold serif font, black text. Composition: Arched text above and below central dice, isolated. Background: White background, clean, minimalist. Mood: Classic, bold, strong, authentic. Details: Heavy linework, saturated colors, strong contrast, clean edges.",
+            'opt5': "A bold logo emblem designed in the American Traditional tattoo art style. The centerpiece features two dice, angled to prominently display 'snake eyes' (a single pip on each). The dice are colored with a rugged, worn, darkened brown vintage wash, defined by heavy black outlines and deep, saturated black shading, giving them a classic, inked look. Arched directly above the dice is the text 'DOS MÁS' in a bold, black, vintage-style serif font, with an artistic tilde accent mark over the 'A'. Arched below the dice in a matching font is the text 'HOUSTON EAST END'. The entire design is isolated on a clean white background. 1:1 aspect ratio."
+        };
+        let costChartInstance = null;
+        let budgetChartInstance = null;
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            initAiLab();
+        });
+        // --- Chart Logic ---
+        function initCharts() {
+            const ctxCost = document.getElementById('costChart').getContext('2d');
+            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const accentColor = isDark ? '#00CED1' : '#CC4E5C';
+            const textColor = isDark ? '#a0a0a0' : '#4a4a4a';
+            // Chart 1: Squarespace Plans Comparison
+            costChartInstance = new Chart(ctxCost, {
+                type: 'bar',
+                data: {
+                    labels: planLabels,
+                    datasets: [{
+                        label: 'Cost ($)',
+                        data: annualTotals,
+                        backgroundColor: ['#999', accentColor, '#999', '#999'],
+                        borderRadius: 4,
+                        barThickness: 40
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { display: false }, ticks: { color: textColor, font: { family: 'Courier New' } } },
+                        x: { grid: { display: false }, ticks: { color: textColor, font: { weight: 'bold' } } }
+                    }
+                }
+            });
+            // Chart 2: Fiscal Year 1 Budget (User Projections)
+            const ctxBudget = document.getElementById('budgetBreakdownChart').getContext('2d');
+            budgetChartInstance = new Chart(ctxBudget, {
+                type: 'bar',
+                data: {
+                    labels: userBudgetLabels,
+                    datasets: [{
+                        label: 'Total Projected Cost ($)',
+                        data: userBudgetTotals,
+                        backgroundColor: [accentColor, '#999', '#999'],
+                        borderRadius: 4,
+                        barThickness: 50
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `$${context.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: textColor, font: { weight: 'bold' } } },
+                        y: { beginAtZero: true, grid: { color: isDark ? '#333' : '#eee' }, ticks: { color: textColor } }
+                    }
+                }
+            });
+        }
+        function updateChart(mode) {
+            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const accentColor = isDark ? '#00CED1' : '#CC4E5C';
+            const btnAnnual = document.getElementById('btnAnnual');
+            const btnMonthly = document.getElementById('btnMonthly');
+            const caption = document.getElementById('chartCaption');
+            if (mode === 'annual') {
+                costChartInstance.data.datasets[0].data = annualTotals;
+                caption.innerText = "Total upfront capital required for 12 months.";
+
+                btnAnnual.className = `text-[10px] font-bold px-3 py-1 rounded text-white dark:text-black transition-all ${isDark ? 'bg-dm-teal' : 'bg-vm-red'}`;
+                btnMonthly.className = "text-[10px] font-bold px-3 py-1 rounded bg-gray-200 text-black dark:bg-gray-800 dark:text-gray-400 transition-all";
+            } else {
+                costChartInstance.data.datasets[0].data = monthlyRates;
+                caption.innerText = "Effective monthly rate when billed annually.";
+
+                btnMonthly.className = `text-[10px] font-bold px-3 py-1 rounded text-white dark:text-black transition-all ${isDark ? 'bg-dm-teal' : 'bg-vm-red'}`;
+                btnAnnual.className = "text-[10px] font-bold px-3 py-1 rounded bg-gray-200 text-black dark:bg-gray-800 dark:text-gray-400 transition-all";
+            }
+            costChartInstance.update();
+        }
+        // --- AI Lab Logic ---
+        function initAiLab() {
+
+            // 1. Copy Prompt Feature
+            document.getElementById('btnCopyPrompt').addEventListener('click', () => {
+                const vibeKey = document.getElementById('vibeSelect').value;
+                const promptText = promptMap[vibeKey] || promptMap['opt5'];
+                navigator.clipboard.writeText(promptText);
+                const icon = document.querySelector('#btnCopyPrompt i');
+                icon.className = 'fas fa-check text-green-500';
+                setTimeout(() => icon.className = 'fas fa-copy', 2000);
+            });
+            // 2. Cocktail Generator
+            document.getElementById('btnCocktail').addEventListener('click', async () => {
+                const input = document.getElementById('cocktailInput').value;
+                const output = document.getElementById('cocktailOutput');
+                if(!input) return;
+                output.innerText = "Mixologist is thinking...";
+                try {
+                    const prompt = `Create a short, edgy cocktail recipe for "DOS MAS" bar based on: ${input}. Format: Name (Bold), Ingredients, Vibe Description.`;
+                    const response = await callGeminiText(prompt);
+                    output.innerText = response;
+                } catch (e) {
+                    output.innerText = "Error contacting mixologist.";
+                }
+            });
+            // 3. Dice Roll Remix
+            const btnRoll = document.getElementById('btnRollDice');
+            const fileInput = document.getElementById('logoUpload');
+            btnRoll.addEventListener('click', async () => {
+                const vibeKey = document.getElementById('vibeSelect').value;
+                const file = fileInput.files[0];
+                const container = document.getElementById('imageContainer');
+                const loader = document.getElementById('loadingOverlay');
+                const shareTools = document.getElementById('shareTools');
+                // UI State
+                loader.classList.remove('hidden');
+                loader.classList.add('flex');
+                shareTools.classList.add('hidden');
+                try {
+                    let imageData = null;
+                    let basePrompt = promptMap[vibeKey] || promptMap['opt5'];
+                    let finalPrompt = "";
+                    if (file) {
+                        imageData = await readFileAsBase64(file);
+                        finalPrompt = `Remix this uploaded logo image to match this style description: ${basePrompt}`;
+                    } else {
+                        finalPrompt = basePrompt;
+                    }
+                    const resultBase64 = await callGeminiImage(finalPrompt, imageData);
+                    container.innerHTML = `<img src="${resultBase64}" class="w-full h-full object-contain p-2" id="generatedImage">`;
+
+                    shareTools.classList.remove('hidden');
+                    loader.classList.add('hidden');
+                    loader.classList.remove('flex');
+                    document.getElementById('btnDownload').onclick = () => {
+                        const link = document.createElement('a');
+                        link.href = resultBase64;
+                        link.download = 'DOS_MAS_Remix.png';
+                        link.click();
+                    };
+                } catch (error) {
+                    console.error(error);
+                    loader.classList.add('hidden');
+                    loader.classList.remove('flex');
+                    container.innerHTML = `<div class="text-center p-4"><i class="fas fa-exclamation-circle text-red-500 text-2xl mb-2"></i><p class="text-xs">Generation failed.</p></div>`;
+                }
+            });
+            // 4. Strategic Analyst Bot
+            const askBtn = document.getElementById('askBotBtn');
+            const questionInput = document.getElementById('questionInput');
+            const botResult = document.getElementById('botResult');
+            askBtn.addEventListener('click', async () => {
+                const userQ = questionInput.value.trim();
+                if (!userQ) return;
+                // UI Loading State
+                askBtn.disabled = true;
+                askBtn.innerText = "ANALYZING...";
+                botResult.innerHTML = '<span class="text-gray-500 loading-dots">Thinking</span>';
+                const systemPrompt = `You are the AI Pitch Assistant for DOS MAS. You represent the founders.
+                CONTEXT:
+                - Business: DOS MAS (Bar/Lounge in Houston East End). Launching Spring 2026.
+                - Tech: Using Squarespace Core/Business Plan ($20.70/mo annual) as MVP. Hosting domain at Cloudflare ($26/yr).
+                - Strategy: Low overhead launch. Upgrade to Commerce Basic only if online sales > $1600/yr to offset 3% transaction fee.
+                - Vibe: Industrial, Neon, Concrete.
+                - Banking: Using Mercury/Privacy.com for virtual cards to control costs.
+
+                INSTRUCTIONS:
+                Answer the user's question confidently based on this data. Be concise, professional, and persuasive. If asked about risks, mention reliance on 3rd party apps (Resy) and Squarespace price hikes.`;
+                try {
+                    const resultText = await callGeminiText(systemPrompt + "\n\nUser Question: " + userQ);
+                    botResult.innerHTML = resultText.replace(/\*\*/g, '').replace(/\*/g, '•').replace(/\n/g, '<br>');
+                } catch (e) {
+                    botResult.innerText = "Error analyzing pitch data.";
+                }
+
+                askBtn.disabled = false;
+                askBtn.innerText = "ANALYZE";
+            });
+        }
+        // --- API Helpers ---
+        async function callGeminiText(prompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = { contents: [{ parts: [{ text: prompt }] }] };
+            const res = await fetch(url, { method: 'POST', body: JSON.stringify(payload) });
+            const data = await res.json();
+            return data.candidates[0].content.parts[0].text;
+        }
+        async function callGeminiImage(prompt, inputImageBase64) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${apiKey}`;
+            const parts = [{ text: prompt }];
+
+            if (inputImageBase64) {
+                const base64Clean = inputImageBase64.split(',')[1];
+                parts.push({
+                    inlineData: { mimeType: "image/png", data: base64Clean }
+                });
+            }
+            const payload = {
+                contents: [{ parts: parts }],
+                generationConfig: { responseModalities: ["IMAGE"] }
+            };
+            const delays = [1000, 2000, 4000];
+            for (let i = 0; i < delays.length; i++) {
+                try {
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!res.ok) throw new Error(res.statusText);
+                    const data = await res.json();
+                    const resultImage = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
+                    if (!resultImage) throw new Error("No image in response");
+                    return `data:image/png;base64,${resultImage}`;
+                } catch (e) {
+                    if (i === delays.length - 1) throw e;
+                    await new Promise(r => setTimeout(r, delays[i]));
+                }
+            }
+        }
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+</body>
+</html>
